@@ -1,0 +1,2 @@
+# locust_redis_user_counter
+locustでredisを使用したユーザーカウンター
