@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    locust_master:
+        build: ./docker-locust
+        container_name: locust-master
+        ports:
+            - 8089:8089
+        volumes:
+            - ./docker-locust/source:/locust-source
+        environment:
+            - LOCUST_MODE=master
+            - TARGET_HOST=http://localhost
+
+    locust_worker:
+        build: ./docker-locust
+        volumes:
+            - ./docker-locust/source:/locust-source
+        environment:
+            - LOCUST_MODE=worker
+            - LOCUST_MASTER=locust-master
+            - TARGET_HOST=http://localhost
+
+    locust_redis:
+        build: ./docker-redis
+        container_name: locust-redis
+        hostname: locust-redis
+

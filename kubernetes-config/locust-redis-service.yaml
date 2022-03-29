@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: locust-redis
+  labels:
+    app: locust-redis
+spec:
+  ports:
+    - port: 6380
+      targetPort: loc-redis
+      protocol: TCP
+      name: loc-redis
+  selector:
+    app: locust-redis
+  type: LoadBalancer
+

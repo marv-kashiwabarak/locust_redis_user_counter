@@ -1,0 +1,24 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: locust-redis
+  labels:
+    name: locust-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locust-redis
+  template:
+    metadata:
+      labels:
+        app: locust-redis
+    spec:
+      containers:
+        - name: locust-redis
+          image: gcr.io/[PROJECT_ID]/locust-redis:latest
+          ports:
+            - name: loc-redis
+              containerPort: 6380
+              protocol: TCP
+
